@@ -56,10 +56,10 @@ const allCountries = () => {
 
     // e.   Print the country which uses US Dollars as currency.
 
-    // var USDollar = allcountrieshere.filter(
-    //   (country) => country.currencies == "USD"
-    // );
-    // console.log(USDollar);
+    var USDollar = allcountrieshere.filter(
+    (country) => country.currencies[0].code === "USD"
+    );
+    console.log(USDollar);
   };
 
   xhr.send();
