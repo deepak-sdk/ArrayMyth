@@ -60,8 +60,35 @@ const allCountries = () => {
     (country) => country.currencies[0].code === "USD"
     );
     console.log(USDollar);
+    
+     for( countries in allcountrieshere){
+      let name = allcountrieshere[countries].name;
+
+      let lat = allcountrieshere[countries].latlng[0];
+      // console.log(lat);
+      let lng = allcountrieshere[countries].latlng[1];
+      // console.log(lng)
+      let URL_Link = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lng}&appid=0fc028fb793762c36fa57dd9422be937`;
+      temperature(name, URL_Link);
+    
+    }
   };
 
   xhr.send();
 };
+
+function temperature(name, URL_Link) {
+  var req = new XMLHttpRequest();
+
+  req.open("POST", URL_Link, true);
+  req.send();
+  req.onload = function () {
+    try {
+      var country_details = JSON.parse(this.response);
+      console.log(`${name} : ${country_details.main.temp}`);
+    } catch (e) {
+      console.log("Error : " + e);
+    }
+  };
+}
 allCountries();
